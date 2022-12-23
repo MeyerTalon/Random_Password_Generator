@@ -25,56 +25,95 @@ function generatePassword() {
         generatePassword();
     }
 
+    if (!includeUpper) {
+        allChars.splice(allChars.indexOf(alphabetUpper), 1);
+    }
+    if (!includeLower) {
+        allChars.splice(allChars.indexOf(alphabetLower), 1);
+    }
+    if (!includeNumerals) {
+        allChars.splice(allChars.indexOf(numerals), 1);
+    }
+    if (!includeSpecials) {
+        allChars.splice(allChars.indexOf(specialChars), 1);
+    }
+
     for (var i = 0; i < length; i++) {
 
-        if (includeUpper && includeLower && includeNumerals && includeSpecials) {
-            var index1 = randomNum(4);
-            var index2 = randomNum(allChars[index1].length);
-            myPassword = myPassword + allChars[index1][index2];
-            
-            if (i === (length - 1)) {
+        var index1 = randomNum(allChars.length - 1);
+        // var lengthOfNestedArr = allChars[index1].length;
+        var index2 = randomNum(allChars[index1].length);  //Error with .length here
+        myPassword = myPassword + allChars[index1][index2];
 
-                var countUpper = 0;
-                var countLower = 0;
-                var countSpecials = 0;
-                var countNumerals = 0;
+        if (i === (length - 1)) {
 
-                for (var j = 0; j < length; j++) {
+            var countUpper = 0;
+            var countLower = 0;
+            var countSpecials = 0;
+            var countNumerals = 0;
 
-                    for (var t = 0; t < alphabetUpper.length; t++) {
-                        if (myPassword[j] === alphabetUpper[t]) {
-                            countUpper++;
-                        }
-                        if (myPassword[j] === alphabetLower[t]) {
-                            countLower++;
-                        }
+            for (var j = 0; j < length; j++) {
+
+                for (var t = 0; t < alphabetUpper.length; t++) {
+                    if (myPassword[j] === alphabetUpper[t]) {
+                        countUpper++;
                     }
-
-                    for (var t = 0; t < numerals.length; t++) {
-                        if (myPassword[j] === numerals[t]) {
-                            countNumerals++;
-                        }
+                    if (myPassword[j] === alphabetLower[t]) {
+                        countLower++;
                     }
-
-                    for (var t = 0; t < specialChars.length; t++) {
-                        if (myPassword[j] === specialChars[t]) {
-                            countSpecials++;
-                        }
-                    }
-
                 }
-                
-                if ((countUpper === 0) || (countLower === 0) || (countNumerals === 0) || (countSpecials === 0)) {
-                    i = -1;
-                    myPassword = "";
-                    countUpper = 0;
-                    countLower = 0;
-                    countNumerals = 0;
-                    countSpecials = 0;
+
+                for (var t = 0; t < numerals.length; t++) {
+                    if (myPassword[j] === numerals[t]) {
+                        countNumerals++;
+                    }
+                }
+
+                for (var t = 0; t < specialChars.length; t++) {
+                    if (myPassword[j] === specialChars[t]) {
+                        countSpecials++;
+                    }
                 }
 
             }
+            
+            console.log(countUpper);
+            console.log(countLower);
+            console.log(countNumerals);
+            console.log(countSpecials);
 
+            if (includeUpper && (countUpper === 0)) {
+                i = -1;
+                myPassword = "";
+                countUpper = 0;
+                countLower = 0;
+                countNumerals = 0;
+                countSpecials = 0;
+            }
+            if (includeLower && (countLower === 0)) {
+                i = -1;
+                myPassword = "";
+                countUpper = 0;
+                countLower = 0;
+                countNumerals = 0;
+                countSpecials = 0;
+            }
+            if (includeNumerals && (countNumerals === 0)) {
+                i = -1;
+                myPassword = "";
+                countUpper = 0;
+                countLower = 0;
+                countNumerals = 0;
+                countSpecials = 0;
+            }
+            if (includeSpecials && (countSpecials === 0)) {
+                i = -1;
+                myPassword = "";
+                countUpper = 0;
+                countLower = 0;
+                countNumerals = 0;
+                countSpecials = 0;
+            }
         }
 
     }
