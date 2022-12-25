@@ -37,15 +37,16 @@ function generatePassword() {
     if (!includeSpecials) {
         allChars.splice(allChars.indexOf(specialChars), 1);
     }
+    var count = 0;
 
     for (var i = 0; i < length; i++) {
-
-        var index1 = randomNum(allChars.length - 1);
+        var index1 = randomNum(allChars.length);
         // var lengthOfNestedArr = allChars[index1].length;
         var index2 = randomNum(allChars[index1].length);  //Error with .length here
         myPassword = myPassword + allChars[index1][index2];
 
         if (i === (length - 1)) {
+            count++;
 
             var countUpper = 0;
             var countLower = 0;
@@ -85,7 +86,7 @@ function generatePassword() {
             if (includeUpper && (countUpper === 0)) {
                 i = -1;
                 myPassword = "";
-                countUpper = 0;
+               countUpper = 0;
                 countLower = 0;
                 countNumerals = 0;
                 countSpecials = 0;
@@ -99,7 +100,7 @@ function generatePassword() {
                 countSpecials = 0;
             }
             if (includeNumerals && (countNumerals === 0)) {
-                i = -1;
+               i = -1;
                 myPassword = "";
                 countUpper = 0;
                 countLower = 0;
@@ -114,6 +115,9 @@ function generatePassword() {
                 countNumerals = 0;
                 countSpecials = 0;
             }
+            if (count > 50) {
+                break;
+            }
         }
 
     }
@@ -127,8 +131,6 @@ function generatePassword() {
     return myPassword;
 
 }
-
-console.log(allChars[1].length);
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
