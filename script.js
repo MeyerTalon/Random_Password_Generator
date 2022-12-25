@@ -3,7 +3,6 @@ var alphabetUpper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
 var alphabetLower = ['a', 'b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's','t', 'u', 'v', 'w', 'x', 'y', 'z'];
 var numerals = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 var specialChars = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'];
-var allChars = [alphabetUpper, alphabetLower, numerals, specialChars];
 
 function generatePassword() {
 
@@ -25,24 +24,26 @@ function generatePassword() {
         generatePassword();
     }
 
-    if (!includeUpper) {
-        allChars.splice(allChars.indexOf(alphabetUpper), 1);
+    var allChars = [];
+
+    if (includeUpper) {
+        allChars.push(alphabetUpper);
     }
-    if (!includeLower) {
-        allChars.splice(allChars.indexOf(alphabetLower), 1);
+    if (includeLower) {
+        allChars.push(alphabetLower);
     }
-    if (!includeNumerals) {
-        allChars.splice(allChars.indexOf(numerals), 1);
+    if (includeNumerals) {
+        allChars.push(numerals);
     }
-    if (!includeSpecials) {
-        allChars.splice(allChars.indexOf(specialChars), 1);
+    if (includeSpecials) {
+        allChars.push(specialChars);
     }
+
     var count = 0;
 
     for (var i = 0; i < length; i++) {
         var index1 = randomNum(allChars.length);
-        // var lengthOfNestedArr = allChars[index1].length;
-        var index2 = randomNum(allChars[index1].length);  //Error with .length here
+        var index2 = randomNum(allChars[index1].length);  
         myPassword = myPassword + allChars[index1][index2];
 
         if (i === (length - 1)) {
